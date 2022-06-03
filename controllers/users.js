@@ -25,7 +25,7 @@ async function getAllUsers() {
 
 async function deleteUser(username) {
   userDatabase.deleteOne({username: username}, (err) => {
-    if (err) return handleError(err)
+    if (err) return (err)
   })
 }
 

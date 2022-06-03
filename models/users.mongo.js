@@ -1,25 +1,28 @@
 const mongoose = require("mongoose");
-const nanoid = require('nanoid')
+const { nanoid } = require("nanoid");
 
-const exerciseSchema = new mongoose.Schema({
-  description: {
-    type: String,
-    required: true,
+const exerciseSchema = new mongoose.Schema(
+  {
+    id: {
+      type: String,
+      default: () => nanoid(5),
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    duration: {
+      type: Number,
+      required: true,
+      min: [1, "Duration too short, at least 1 minute"],
+    },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  duration: {
-    type: Number,
-    required: true,
-    min: [1, "Duration too short, at least 1 minute"],
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  userId: {
-    type: String,
-    required: true,
-  },
-});
+  { _id: false }
+);
 
 const userSchema = new mongoose.Schema({
   username: {

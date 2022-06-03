@@ -19,17 +19,16 @@ router.post("/api/new-user/", async (req, res) => {
 
 // delete specific user
 router.delete("/api/:username/delete/", (req, res) => {
-  const username = req.params;
-  console.log(username);
+  let username = Object.values(req.params);
   userController.deleteUser(username);
   res.status(200).send({ "deleted user": username });
 });
 
-// TODO NOT DONE
-// create a new excercise as a user - return the excercise
+// create a new excercise as a user - return the success
 router.post("/api/:username/excercises/", (req, res) => {
-  const username = req.params;
-  
+  const username = Object.values(req.params);
+  excerciseController.addExcercise(username, req.body);
+  res.status(201).send({"excercise added": true})
 });
 
 // TODO NOT DONE
@@ -38,7 +37,13 @@ router.post("/api/:username/excercises/", (req, res) => {
 //      - optional from-to parameter are dates in yyyy-mm-dd
 //      - optional limit returns
 // let { userId, from, to, limit } = req.query;
-router.get("/api/:username/logs/", (req, res) => {});
+router.get("/api/:username/logs/", async (req, res) => {
+  const {from, to, limit } = req.query;
+  console.log( from, to, limit)
+  const username = Object.values(req.params);
+  logs = await excerciseController.getAllExcercises(username, from, to, limit);
+  res.status(200).send(logs);
+});
 
 // TODO NOT DONE
 // update excercise of a user
