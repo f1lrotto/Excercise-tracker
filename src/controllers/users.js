@@ -1,4 +1,4 @@
-const userDatabase = require("./../models/users.mongo");
+const userDatabase = require("../models/users.mongo");
 
 async function createNewUser(username) {
   user = await userDatabase.findOne({ username });
@@ -25,7 +25,7 @@ async function getAllUsers() {
 
 async function deleteUser(username) {
   userDatabase.deleteOne({username: username}, (err) => {
-    if (err) return (err)
+    if (err) return (err) 
   })
 }
 

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const userController = require("./../controllers/users");
-const excerciseController = require("./../controllers/excercises");
+const userController = require("../controllers/users");
+const excerciseController = require("../controllers/excercises");
 
 // get all users - return usernames and IDs
 router.get("/api/users/", async (req, res) => {
@@ -31,7 +31,7 @@ router.post("/api/:username/excercises/", (req, res) => {
   res.status(201).send({"excercise added": true})
 });
 
-// TODO NOT DONE
+// TODO NOT DONE 
 // get all excercises of a user
 // - return array of all exc and count of all excercises
 //      - optional from-to parameter are dates in yyyy-mm-dd

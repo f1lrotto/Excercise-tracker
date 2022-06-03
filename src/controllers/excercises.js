@@ -1,4 +1,4 @@
-const userDatabase = require("./../models/users.mongo");
+const userDatabase = require("../models/users.mongo");
 
 async function addExcercise(username, excercise) {
   await userDatabase.updateOne(
