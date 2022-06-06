@@ -1,8 +1,32 @@
 const express = require("express");
 const router = express.Router();
 
+const userDatabase = require("./models/users.mongo");
 const userController = require("../controllers/users");
 const excerciseController = require("../controllers/excercises");
+const { isLoggedIn, isLoggedOut } = require("./loggedInOut");
+
+router.get("/", isLoggedIn, (req, res) => {
+  res.render("index", { title: "Home" });
+});
+
+// email, password
+router.get("/login", (req, res) => {
+  res.render("login", { title: "Login" });
+});
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login?error=true",
+  })
+);
+
+// name, email, password
+router.post("/register", (req, res) => {
+  const { name, email, password } = req.body;
+});
 
 // get all users - return usernames and IDs
 router.get("/api/users/", async (req, res) => {
@@ -28,18 +52,18 @@ router.delete("/api/:username/delete/", (req, res) => {
 router.post("/api/:username/excercises/", (req, res) => {
   const username = Object.values(req.params);
   excerciseController.addExcercise(username, req.body);
-  res.status(201).send({"excercise added": true})
+  res.status(201).send({ "excercise added": true });
 });
 
-// TODO NOT DONE 
+// TODO NOT DONE
 // get all excercises of a user
 // - return array of all exc and count of all excercises
 //      - optional from-to parameter are dates in yyyy-mm-dd
 //      - optional limit returns
 // let { userId, from, to, limit } = req.query;
 router.get("/api/:username/logs/", async (req, res) => {
-  const {from, to, limit } = req.query;
-  console.log( from, to, limit)
+  const { from, to, limit } = req.query;
+  console.log(from, to, limit);
   const username = Object.values(req.params);
   logs = await excerciseController.getAllExcercises(username, from, to, limit);
   res.status(200).send(logs);
