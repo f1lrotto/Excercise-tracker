@@ -1,0 +1,41 @@
+<form action="new-excercise" method="post">
+    <div>
+        <h1>New Excercise</h1>
+    </div>
+    <div class="form-group">
+        <label>Description: </label>
+        <input
+        type="text"
+        name="description"
+        id="description"
+        placeholder="Enter the excercise description"
+        required
+    />
+    <div class="form-group">
+        <label>Duration in minutes: </label>
+        <input
+        type="number"
+        name="duration"
+        id="duration"
+        min="1"
+        max="180"
+        placeholder="Enter the excercise duration"
+        required
+    />
+    <div class="form-group">
+        <label>Date: </label>
+        <input
+        type="date"
+        name="date"
+        id="date"
+        placeholder="Enter date of the excercise"
+        required
+    />
+    <script type="text/javascript">
+        date.max = new Date().toISOString().split("T")[0];
+    </script>
+    </div>
+    <div>
+        <input type="submit" value="Submit" />
+    </div>
+</form>

@@ -28,7 +28,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Passport

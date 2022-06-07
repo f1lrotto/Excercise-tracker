@@ -1,21 +1,26 @@
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 
-const userDatabase = require("./models/users.mongo");
-const userController = require("../controllers/users");
 const excerciseController = require("../controllers/excercises");
 const { isLoggedIn, isLoggedOut } = require("./loggedInOut");
+const register = require("../controllers/register");
 
 router.get("/", isLoggedIn, (req, res) => {
   res.render("index", { title: "Home" });
 });
 
 // email, password
-router.get("/login", (req, res) => {
-  res.render("login", { title: "Login" });
+router.get("/login", isLoggedOut, (req, res) => {
+  const response = {
+    title: "Login",
+    error: req.query.error,
+  };
+
+  res.render("login", response);
 });
 
-app.post(
+router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/",
@@ -23,58 +28,70 @@ app.post(
   })
 );
 
-// name, email, password
-router.post("/register", (req, res) => {
-  const { name, email, password } = req.body;
+router.get("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
 });
 
-// get all users - return usernames and IDs
-router.get("/api/users/", async (req, res) => {
-  const result = await userController.getAllUsers();
-  res.status(200).send(result);
+router.get("/register", (req, res) => {
+  const response = {
+    title: "Register",
+    error: req.query.error,
+  };
+  res.render("register", response);
 });
 
-// create a new user - return username and ID
-router.post("/api/new-user/", async (req, res) => {
-  const { username } = req.body;
-  const result = await userController.createNewUser(username);
-  res.status(201).send(result);
+router.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+  const newUser = await register(username, email, password);
+  if ((await newUser) === false) {
+    res.status(401).send({ message: "username or email already taken!" });
+  } else {
+    res.status(200).redirect("/login");
+  }
 });
 
-// delete specific user
-router.delete("/api/:username/delete/", (req, res) => {
-  let username = Object.values(req.params);
-  userController.deleteUser(username);
-  res.status(200).send({ "deleted user": username });
+router.get("/excercises", isLoggedIn, async (req, res) => {
+  const username = req.user.username;
+  let logs = await excerciseController.getAllExcercises(username);
+  res.render("excercises", logs);
 });
 
-// create a new excercise as a user - return the success
-router.post("/api/:username/excercises/", (req, res) => {
-  const username = Object.values(req.params);
-  excerciseController.addExcercise(username, req.body);
-  res.status(201).send({ "excercise added": true });
+router.get("/new-excercise", isLoggedIn, (req, res) => {
+  res.render("newExcercise");
 });
 
-// TODO NOT DONE
-// get all excercises of a user
-// - return array of all exc and count of all excercises
-//      - optional from-to parameter are dates in yyyy-mm-dd
-//      - optional limit returns
-// let { userId, from, to, limit } = req.query;
-router.get("/api/:username/logs/", async (req, res) => {
-  const { from, to, limit } = req.query;
-  console.log(from, to, limit);
-  const username = Object.values(req.params);
-  logs = await excerciseController.getAllExcercises(username, from, to, limit);
-  res.status(200).send(logs);
+router.post("/new-excercise", isLoggedIn, async (req, res) => {
+  const excercise = req.body;
+  const username = req.user.username;
+  await excerciseController.addExcercise(username, excercise);
+  res.redirect("/excercises");
 });
 
-// TODO NOT DONE
-// update excercise of a user
-router.put("/api/:username/update/:excerciseName", (req, res) => {});
+router.get('/edit/:id', isLoggedIn, async (req, res) => {
+  const id = req.params.id
+  const username = req.user.username;
+  const excercise = await excerciseController.getExcercise(username, id) // not implemented
+  res.render('editExcercise', excercise)
+})
 
-// TODO NOT DONE
-// delete excercise of a user
-router.delete("/api/:username/delete/:excerciseName", (req, res) => {});
+router.post('/edit/:id', isLoggedIn, async (req, res) => {
+  const excercise = req.body;
+  const username = req.user.username;
+  await excerciseController.editExcercise(username, id, excercise); // not implemented
+  res.redirect('/excercises')
+})
+
+router.use("/delete/:id", isLoggedIn, async (req, res) => {
+  const id = req.params.id;
+  const username = req.user.username;
+  await excerciseController.deleteExcercise(username, id); // not implemented
+  res.redirect("/excercises");
+});
+
 
 module.exports = router;

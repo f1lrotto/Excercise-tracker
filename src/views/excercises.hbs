@@ -1,0 +1,22 @@
+<div class="excercises">
+  {{#if logs}}
+    <h1>Your excercises</h1>
+    <div class="excercises-container">
+      {{#each logs}}
+        <div class="excercise">
+          <h4>Description: {{this.description}}</h4>
+          <h4>Duration: {{this.duration}}</h4>
+          <h4>Date: {{this.date}}</h4>
+          <a href="/edit/{{this.id}}">Edit</a>
+          <a href="/delete/{{this.id}}">Delete</a>
+        </div>
+      {{/each}}
+    </div>  
+  {{else}}
+    
+      <h2>
+        No saved excercise yet!
+      </h2>
+    
+  {{/if}}
+</div>
