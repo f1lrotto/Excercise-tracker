@@ -49,7 +49,11 @@ router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
   const newUser = await register(username, email, password);
   if ((await newUser) === false) {
-    res.status(401).send({ message: "username or email already taken!" });
+    const response = {
+      title: "Register",
+      error: "User already exists",
+    };
+    res.status(401).render("register", response);
   } else {
     res.status(200).redirect("/login");
   }
@@ -72,26 +76,26 @@ router.post("/new-excercise", isLoggedIn, async (req, res) => {
   res.redirect("/excercises");
 });
 
-router.get('/edit/:id', isLoggedIn, async (req, res) => {
-  const id = req.params.id
+router.get("/edit/:id", isLoggedIn, async (req, res) => {
+  const id = req.params.id;
   const username = req.user.username;
-  const excercise = await excerciseController.getExcercise(username, id) // not implemented
-  res.render('editExcercise', excercise)
-})
+  const excercise = await excerciseController.getExcercise(username, id);
+  res.render("editExcercise", excercise);
+});
 
-router.post('/edit/:id', isLoggedIn, async (req, res) => {
+router.post("/edit/:id", isLoggedIn, async (req, res) => {
   const excercise = req.body;
+  const id = req.params.id;
   const username = req.user.username;
-  await excerciseController.editExcercise(username, id, excercise); // not implemented
-  res.redirect('/excercises')
-})
+  await excerciseController.editExcercise(username, id, excercise);
+  res.redirect("/excercises");
+});
 
 router.use("/delete/:id", isLoggedIn, async (req, res) => {
   const id = req.params.id;
   const username = req.user.username;
-  await excerciseController.deleteExcercise(username, id); // not implemented
+  await excerciseController.deleteExcercise(username, id);
   res.redirect("/excercises");
 });
-
 
 module.exports = router;

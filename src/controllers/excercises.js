@@ -1,5 +1,23 @@
 const userDatabase = require("../models/users.mongo");
 
+function filterLogs(object, id) {
+  var getLogs = ({ logs }) => ({ logs });
+  var logs = getLogs(object);
+  logs = Object.values(logs);
+  logs = logs[0];
+  log = logs.find((x) => x.id == id);
+  if (log != undefined) {
+    let date = (log.date).toISOString().substring(0, 10);    
+    var newLog = {
+      description: log.description,
+      duration: log.duration,
+      date: date,
+      id: log.id
+    }
+  }
+  return newLog;
+}
+
 async function addExcercise(username, excercise) {
   await userDatabase.updateOne(
     { username: username },
@@ -8,20 +26,38 @@ async function addExcercise(username, excercise) {
 }
 
 async function getExcercise(username, id) {
-  await userDatabase.findOne(
-    { username: username },{})
+  const user = await userDatabase.findOne({
+    username: username,
+  });
+  const logs = filterLogs(user, id);
+  return await logs;
 }
 
 async function editExcercise(username, id, excercise) {
-  await userDatabase.updateOne({ username: username }, {});
+  await userDatabase.updateOne(
+    { username: username, logs: { $elemMatch: { id: id } } },
+    {
+      $set: {
+        "logs.$.description": excercise.description,
+        "logs.$.duration": excercise.duration,
+        "logs.$.date": excercise.date,
+      },
+    }
+  );
 }
 
 async function deleteExcercise(username, id) {
-  // kokot neviem teraz
+   await userDatabase.updateOne(
+     { username: username, logs: { $elemMatch: { id: id } } },
+     {
+       $pull: {
+         logs: {id: id}
+       },
+     }
+   );
 }
 
 async function getAllExcercises(username, from, to, limit) {
-  // TODO add filters
   let getLogs = ({ logs }) => ({ logs });
   const user = await userDatabase.findOne({ username }).lean();
   const logs = getLogs(await user);
@@ -30,6 +66,8 @@ async function getAllExcercises(username, from, to, limit) {
 
 module.exports = {
   addExcercise,
+  getExcercise,
   editExcercise,
+  deleteExcercise,
   getAllExcercises,
 };
