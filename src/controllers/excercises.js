@@ -5,7 +5,7 @@ function filterLogs(object, id) {
   var logs = getLogs(object);
   logs = Object.values(logs);
   logs = logs[0];
-  log = logs.find((x) => x.id == id);
+  var log = logs.find((x) => x.id == id);
   if (log != undefined) {
     let date = (log.date).toISOString().substring(0, 10);    
     var newLog = {

@@ -10,7 +10,6 @@ router.get("/", isLoggedIn, (req, res) => {
   res.render("index", { title: "Home" });
 });
 
-// email, password
 router.get("/login", isLoggedOut, (req, res) => {
   const response = {
     title: "Login",
