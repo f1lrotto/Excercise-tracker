@@ -47,6 +47,9 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
   const newUser = await register(username, email, password);
+  if ((await newUser) === "err") {
+    res.status(500).redirect("/register");
+  }
   if ((await newUser) === false) {
     const response = {
       title: "Register",

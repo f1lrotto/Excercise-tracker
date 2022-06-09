@@ -15,7 +15,11 @@ const app = express();
 require("dotenv").config();
 
 // Connect to the database
-connectMongo();
+try {
+  connectMongo();
+} catch (error) {
+  process.exit(1)
+}
 
 // Default middleware
 app.engine("hbs", hbs.engine({ extname: ".hbs" }));
@@ -36,7 +40,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-  done(null, user.id); // not implemented
+  done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {

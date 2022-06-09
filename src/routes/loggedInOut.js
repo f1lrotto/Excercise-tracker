@@ -8,7 +8,6 @@ function isLoggedOut(req, res, next) {
   res.redirect("/");
 }
 
-// super jednoduche auth route guards ;)
 
 module.exports = {
     isLoggedIn,

@@ -4,9 +4,9 @@
     <div class="excercises-container">
       {{#each logs}}
         <div class="excercise">
-          <h4>Description: {{this.description}}</h4>
-          <h4>Duration: {{this.duration}}</h4>
-          <h4>Date: {{this.date}}</h4>
+          <h3>Description: {{this.description}}</h3>
+          <h3>Duration: {{this.duration}}</h3>
+          <h3 class="date">Date: {{this.created_at}}</h3>
           <a href="edit/{{this.id}}">Edit</a>
           <a href="delete/{{this.id}}">Delete</a>
         </div>
