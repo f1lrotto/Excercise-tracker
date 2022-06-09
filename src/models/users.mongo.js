@@ -16,6 +16,7 @@ const exerciseSchema = new mongoose.Schema(
       required: true,
       min: [1, "Duration too short, at least 1 minute"],
     },
+    // je dobra prax pouzivat "created_at" property na toto
     date: {
       type: Date,
       default: Date.now,
@@ -39,6 +40,8 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   logs: [exerciseSchema],
+
+  // tiez nie je na skodu vsade dat "created_at" property, zaroven je tiez dost popularna aj "updated_at" property
 });
 
 module.exports = mongoose.model("user", userSchema);
