@@ -61,7 +61,7 @@ async function getAllExcercises(username, from, to, limit) {
   let getLogs = ({ logs }) => ({ logs });
   const user = await userDatabase.findOne({ username }).lean();
   const logs = getLogs(await user);
-  return await logs; //Object.values(logs);
+  return await logs; // make the dates better with for each (delete time, leave only date)
 }
 
 module.exports = {
