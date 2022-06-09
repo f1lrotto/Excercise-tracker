@@ -20,6 +20,7 @@ async function register(username, email, password) {
         return true;
       } catch (error) {
         console.error(error);
+        // catch je fajn, ale kod sa ti zasekne kedze v tom pripade callstack vyssie nedostane naspat nikdy ziadny return
       }
     });
   });
