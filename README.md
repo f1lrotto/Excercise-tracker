@@ -1,6 +1,8 @@
 # Excercise-tracker
 ## Introduction
-This is an excercise tracker that allowes user to register an account with their username and email. 
+This is an excercise tracker that allowes users to track progress on their fitness journey!
+
+To start using the application, user first needs to register an account with their username and email. 
 
 User can then access all of theirs existing excercises, add a new excercise, edit and delete them. It uses sessions, so even after reloading the page, user stays logged in until they themselves log out. 
 
