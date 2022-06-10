@@ -21,12 +21,12 @@ This application stores its data on a mongoDB database that is hosted on Atlas. 
 For authentication bcrypt, passport and passport-local with Local Strategy is used to authenticate an user with their username and password .
 
 
-## Install the dependancies
+## Running the project
+
+### Install the dependancies
 ```
 npm install
 ``` 
-## Running the project
-
 ### Creating .env file
 You need to create a `.env` file in the `/src` directory
 
