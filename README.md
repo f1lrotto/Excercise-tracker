@@ -7,7 +7,7 @@ After logging in, they can:
 - view their existing excercises
 - edit an existing excercise
 - delete an excercise
-## Technologies used
+### Technologies used
 Front-end is running handlebars, while back-end is running on Node.js with express
 
 For authentication, bcrypt, passport and passport-local with Local Strategy is used to authenticate using a username and password .
@@ -22,6 +22,7 @@ npm install
 
 ### Creating .env file
 You need to create a `.env` file in the `/src` directory
+
 In this file you should include:
 - `PORT` - on which the application will run on
 - `MONGO_URI` - a connect URI to your mongoDB database
