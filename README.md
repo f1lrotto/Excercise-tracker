@@ -16,11 +16,11 @@ This application has all of its endpoints protected, so if no one is logged in, 
   - edit an existing excercise
   - delete a specific excercise
 ### Technologies used
-Front-end is created with handlebars, while back-end is running on Node.js with express
+Front-end is created with **handlebars**, while back-end is running on **Node.js** with **express**
 
-This application stores its data on a mongoDB database that is hosted on Atlas. To access the mongoDB database, mongoose is used
+This application stores its data on a **mongoDB** database that is hosted on Atlas. To access the mongoDB database, **mongoose** is used
 
-For authentication bcrypt, passport and passport-local with Local Strategy is used to authenticate an user with their username and password .
+For authentication **bcrypt**, **passport** and **passport-local** with Local Strategy is used to authenticate an user with their username and password .
 
 
 ## Running the project
