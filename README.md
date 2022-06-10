@@ -7,10 +7,12 @@ User can then access all of theirs existing excercises, add a new excercise, edi
 This application has all of its endpoints protected, so if no one is logged in, you can't access anything else than a login/register screen, in order not to expose any data to unauthorised users
 
 ### Functionality
-- view all of theirs existing excercises
-- add a new excercise, with its description, duration and date when it was performed
-- edit an existing excercise
-- delete a specific excercise
+- register an account
+- after logging in:
+  - view all existing excercises
+  - add a new excercise, with its description, duration and date when it was performed
+  - edit an existing excercise
+  - delete a specific excercise
 ### Technologies used
 Front-end is created with handlebars, while back-end is running on Node.js with express
 
