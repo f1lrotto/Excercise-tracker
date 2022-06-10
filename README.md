@@ -4,7 +4,7 @@ This is an excercise tracker that allowes user to register an account with their
 
 User can then access all of theirs existing excercises, add a new excercise, edit and delete them. It uses sessions, so even after reloading the page, user stays logged in until they themselves log out. 
 
-This application has all of its endpoints protected, so if no one is logged in, you can't access anything else than a login/register screen, in order not to expose any data to unauthorised users
+This application has all of its endpoints protected, so if no one is logged in, you can't access anything else than a login/register screen, in order not to expose any data to unauthorised users.
 
 ### Functionality
 - register an account
