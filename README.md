@@ -1,18 +1,23 @@
 # Excercise-tracker
 ## Introduction
-This is an excercise tracker created with Node.js and express on the back-end, running handlebars on the front-end. It allowes users to register with their username and email. 
+This is an excercise tracker that allowes user to register an account with their username and email. 
 
-After logging in, they can:
-- add a new excercise
-- view their existing excercises
+User can then access all of theirs existing excercises, add a new excercise, edit and delete them. It uses sessions, so even after reloading the page, user stays logged in until they themselves log out. 
+
+This application has all of its endpoints protected, so if no one is logged in, you can't access anything else than a login/register screen, in order not to expose any data to unauthorised users
+
+### Functionality
+- view all of theirs existing excercises
+- add a new excercise, with its description, duration and date when it was performed
 - edit an existing excercise
-- delete an excercise
+- delete a specific excercise
 ### Technologies used
-Front-end is running handlebars, while back-end is running on Node.js with express
+Front-end is created with handlebars, while back-end is running on Node.js with express
 
-For authentication, bcrypt, passport and passport-local with Local Strategy is used to authenticate using a username and password .
+This application stores its data on a mongoDB database that is hosted on Atlas. To access the mongoDB database, mongoose is used
 
-To access the mongoDB database which is hosted on Atlas, I've used mongoose
+For authentication bcrypt, passport and passport-local with Local Strategy is used to authenticate an user with their username and password .
+
 
 ## Install the dependancies
 ```
