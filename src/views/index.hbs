@@ -1,4 +1,47 @@
 <div class="home">
   <h1>{{title}}</h1>
-  <h2>Make the program README and paste it here</h2>
+  <h2 id="introduction">Introduction</h2>
+  <p>This is an excercise tracker that allowes users to track progress on their
+    fitness journey!</p>
+  <p>To start using the application, user first needs to register an account
+    with their username and email.
+  </p>
+  <p>User can then access all of theirs existing excercises, add a new
+    excercise, edit and delete them. It uses sessions, so even after reloading
+    the page, user stays logged in until they themselves log out.
+  </p>
+  <p>This application has all of its endpoints protected, so if no one is logged
+    in, you can&#39;t access anything else than a login/register screen, in
+    order not to expose any data to unauthorised users.</p>
+  <h3 id="functionality">Functionality</h3>
+  <ul>
+    <li>register an account</li>
+    <li>after logging in:<ul>
+        <li>view all existing excercises</li>
+        <li>add a new excercise, with its description, duration and date when it
+          was performed</li>
+        <li>edit an existing excercise</li>
+        <li>delete a specific excercise</li>
+
+      </ul>
+    </li>
+  </ul>
+  <h3 id="technologies-used">Technologies used</h3>
+  Front-end is created with
+  <strong>handlebars</strong>, while back-end is running on
+  <strong>Node.js</strong>
+  with
+  <strong>express</strong>
+  <p>This application stores its data on a
+    <strong>mongoDB</strong>
+    database that is hosted on Atlas. To access the mongoDB database,
+    <strong>mongoose</strong>
+    is used</p>
+  <p>For authentication
+    <strong>bcrypt</strong>,
+    <strong>passport</strong>
+    and
+    <strong>passport-local</strong>
+    with Local Strategy is used to authenticate an user with their username and
+    password.</p>
 </div>
