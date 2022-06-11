@@ -67,7 +67,6 @@ async function getAllExcercises(username, from, to, limit) {
     .findOne({ username }, { _id: 0, logs: 1 })
     .lean();
   logs = prettyTime(logs)
-  console.log(logs)
   return await logs;
 }
 
