@@ -20,7 +20,7 @@ Front-end is created with **handlebars**, while back-end is running on **Node.js
 
 This application stores its data on a **mongoDB** database that is hosted on Atlas. To access the mongoDB database, **mongoose** is used
 
-For authentication **bcrypt**, **passport** and **passport-local** with Local Strategy is used to authenticate an user with their username and password .
+For authentication **bcrypt**, **passport** and **passport-local** with Local Strategy is used to authenticate an user with their username and password.
 
 
 ## Running the project
