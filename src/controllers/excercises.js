@@ -1,4 +1,6 @@
 const userDatabase = require("../models/users.mongo");
+const moment = require("moment");
+
 
 async function addExcercise(username, excercise) {
   await userDatabase.updateOne(
@@ -51,11 +53,22 @@ async function deleteExcercise(username, id) {
   );
 }
 
+function prettyTime(logs) {
+  for (const log in logs) {
+    logs[log].forEach(element => {
+      element.created_at = moment(element.created_at).format('ddd Do MMM YYYY')
+    });
+  }
+  return logs
+}
+
 async function getAllExcercises(username, from, to, limit) {
-  const logs = await userDatabase
+  let logs = await userDatabase
     .findOne({ username }, { _id: 0, logs: 1 })
     .lean();
-  return await logs; // jebat toto, to si uz frontendaci poriesia :D
+  logs = prettyTime(logs)
+  console.log(logs)
+  return await logs;
 }
 
 module.exports = {
