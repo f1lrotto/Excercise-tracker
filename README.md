@@ -1,10 +1,10 @@
-# Excercise-tracker
+# Exercise-tracker
 ## Introduction
-This is an excercise tracker that allowes users to track progress on their fitness journey!
+This is an exercise tracker that allowes users to track progress on their fitness journey!
 
 To start using the application, user first needs to register an account with their username and email. 
 
-User can then access all of theirs existing excercises, add a new excercise, edit and delete them. It uses sessions, so even after reloading the page, user stays logged in until they themselves log out. 
+User can then access all of theirs existing excercises, add a new exercise, edit and delete them. It uses sessions, so even after reloading the page, user stays logged in until they themselves log out. 
 
 This application has all of its endpoints protected, so if no one is logged in, you can't access anything else than a login/register screen, in order not to expose any data to unauthorised users.
 
@@ -12,9 +12,9 @@ This application has all of its endpoints protected, so if no one is logged in, 
 - register an account
 - after logging in:
   - view all existing excercises
-  - add a new excercise, with its description, duration and date when it was performed
-  - edit an existing excercise
-  - delete a specific excercise
+  - add a new exercise, with its description, duration and date when it was performed
+  - edit an existing exercise
+  - delete a specific exercise
 ### Technologies used
 Front-end is created with **handlebars**, while back-end is running on **Node.js** with **express**
 
