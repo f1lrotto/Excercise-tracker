@@ -1,4 +1,6 @@
 # Exercise-tracker
+## Check out the app
+This application is hosted [here](https://excercise-tracker-f1lrotto.herokuapp.com/).
 ## Introduction
 This is an exercise tracker that allowes users to track progress on their fitness journey!
 
